@@ -10,7 +10,7 @@
         android:id="@+id/ivBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#0955fa"
+        android:background="#CC000000"
         android:scaleType="centerCrop"
         tools:ignore="ContentDescription" />
 
@@ -83,17 +83,6 @@
                     tools:ignore="MissingPrefix"
                     tools:targetApi="o"
                     tools:text="Caller Name" />
-
-                <TextView
-                    android:id="@+id/tvNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/action_text"
-                    android:textSize="@dimen/size_text_action"
-                    tools:text="Some info" />
 
             </LinearLayout>
 

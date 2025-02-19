@@ -15,6 +15,7 @@
 
     <dimen name="base_margin_revert_x5">-50dp</dimen>
     <dimen name="size_avatar">120dp</dimen>
+    <dimen name="s_size_button">48dp</dimen>
     <dimen name="size_button">60dp</dimen>
     <dimen name="size_button_x2">120dp</dimen>
     <dimen name="size_button_x2_5">150dp</dimen>
