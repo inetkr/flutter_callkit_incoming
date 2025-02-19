@@ -42,6 +42,7 @@
 
     <TextView
         android:id="@+id/tvUsername"
+        android:id="@+id/tvNameCaller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -60,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUsername"
+        android:layout_below="@id/tvNameCaller"
         android:layout_marginTop="4dp"
         android:layout_toEndOf="@id/ivAvatar"
         android:layout_toRightOf="@id/ivAvatar"
@@ -72,6 +74,7 @@
 
     <ImageView
         android:id="@+id/tvAccept"
+        android:id="@+id/ivAcceptCall"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_alignParentEnd="true"
@@ -85,6 +88,7 @@
 
     <ImageView
         android:id="@+id/tvDecline"
+        android:id="@+id/ivDeclineCall"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_centerVertical="true"
@@ -92,8 +96,11 @@
         android:layout_marginRight="16dp"
         android:layout_toStartOf="@id/tvAccept"
         android:layout_toLeftOf="@id/tvAccept"
+        android:layout_toStartOf="@id/ivAcceptCall"
+        android:layout_toLeftOf="@id/ivAcceptCall"
         android:background="@drawable/bg_button_decline"
         android:padding="4dp"
         android:src="@drawable/ic_decline" />
 
 </RelativeLayout>
+

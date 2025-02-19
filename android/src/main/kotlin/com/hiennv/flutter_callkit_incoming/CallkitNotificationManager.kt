@@ -150,27 +150,36 @@ class CallkitNotificationManager(private val context: Context) {
             data.getBoolean(CallkitConstants.EXTRA_CALLKIT_IS_CUSTOM_SMALL_EX_NOTIFICATION, false)
         if (isCustomNotification) {
             notificationViews =
-                RemoteViews(context.packageName, R.layout.layout_custom_notification)
-            initNotificationViews(notificationViews!!, data)
+                    /*notificationViews =
+                        RemoteViews(context.packageName, R.layout.layout_custom_notification)
+                    initNotificationViews(notificationViews!!, data)
 
-            if ((Build.MANUFACTURER.equals(
-                    "Samsung",
-                    ignoreCase = true
-                ) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) || isCustomSmallExNotification
-            ) {
-                notificationSmallViews =
-                    RemoteViews(context.packageName, R.layout.layout_custom_small_ex_notification)
-                initNotificationViews(notificationSmallViews!!, data)
-            } else {
-                notificationSmallViews =
-                    RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
-                initNotificationViews(notificationSmallViews!!, data)
-            }
+                    if ((Build.MANUFACTURER.equals(
+                            "Samsung",
+                            ignoreCase = true
+                        ) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) || isCustomSmallExNotification
+                    ) {
+                        notificationSmallViews =
+                            RemoteViews(context.packageName, R.layout.layout_custom_small_ex_notification)
+                        initNotificationViews(notificationSmallViews!!, data)
+                    } else {
+                        notificationSmallViews =
+                            RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
+                        initNotificationViews(notificationSmallViews!!, data)
+                    }
 
-            notificationBuilder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                    notificationBuilder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                    notificationBuilder.setCustomContentView(notificationSmallViews)*/
+
+                notificationSmallViews =
+                RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
+            initNotificationViews(notificationSmallViews!!, data)
+
             notificationBuilder.setCustomContentView(notificationSmallViews)
             notificationBuilder.setCustomBigContentView(notificationViews)
             notificationBuilder.setCustomHeadsUpContentView(notificationSmallViews)
+
+
         } else {
             notificationBuilder.setContentText(
                 data.getString(
@@ -572,7 +581,7 @@ class CallkitNotificationManager(private val context: Context) {
 
     fun requestFullIntentPermission(activity: Activity?) {
         if (Build.VERSION.SDK_INT > 33) {
-           val intent = Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT).apply {
+            val intent = Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT).apply {
                 data =  Uri.fromParts("package", activity?.packageName, null)
             }
             activity?.startActivity(intent)
@@ -665,5 +674,6 @@ class CallkitNotificationManager(private val context: Context) {
 
 
 }
+
 
 
