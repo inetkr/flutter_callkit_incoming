@@ -149,8 +149,8 @@ class CallkitNotificationManager(private val context: Context) {
         val isCustomSmallExNotification =
             data.getBoolean(CallkitConstants.EXTRA_CALLKIT_IS_CUSTOM_SMALL_EX_NOTIFICATION, false)
         if (isCustomNotification) {
-            notificationViews =
-                    /*notificationViews =
+            /*notificationViews =
+                    notificationViews =
                         RemoteViews(context.packageName, R.layout.layout_custom_notification)
                     initNotificationViews(notificationViews!!, data)
 
@@ -171,7 +171,7 @@ class CallkitNotificationManager(private val context: Context) {
                     notificationBuilder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
                     notificationBuilder.setCustomContentView(notificationSmallViews)*/
 
-                notificationSmallViews =
+            notificationSmallViews =
                 RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
             initNotificationViews(notificationSmallViews!!, data)
 
