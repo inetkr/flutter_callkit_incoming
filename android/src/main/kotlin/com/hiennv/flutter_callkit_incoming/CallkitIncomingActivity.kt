@@ -178,6 +178,10 @@ class CallkitIncomingActivity : Activity() {
         tvNameCaller.text = data?.getString(CallkitConstants.EXTRA_CALLKIT_NAME_CALLER, "")
         tvNumber.text = data?.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
         tvNumber.visibility = if (isShowCallID == true) View.VISIBLE else View.INVISIBLE
+        val extraValue = data?.getSerializable(CallkitConstants.EXTRA_CALLKIT_EXTRA) as HashMap<String, Any?>
+        val caller = extraValue["caller"]
+        Log.d("CALLER_DATA", "CALLER_DATA: $caller")
+        Log.d("CALLER_DATA", "TYPE: ${caller?.javaClass?.kotlin}")
 
 		try {
 			tvNameCaller.setTextColor(Color.parseColor(textColor))

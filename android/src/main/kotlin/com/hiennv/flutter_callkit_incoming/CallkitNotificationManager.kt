@@ -174,10 +174,7 @@ class CallkitNotificationManager(private val context: Context) {
             notificationSmallViews =
                 RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
             initNotificationViews(notificationSmallViews!!, data)
-
             notificationBuilder.setCustomContentView(notificationSmallViews)
-            notificationBuilder.setCustomBigContentView(notificationViews)
-            notificationBuilder.setCustomHeadsUpContentView(notificationSmallViews)
 
 
         } else {
