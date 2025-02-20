@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="@drawable/bg_notification"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
@@ -41,7 +40,6 @@
         android:src="@drawable/ic_default_avatar" />
 
     <TextView
-        android:id="@+id/tvUsername"
         android:id="@+id/tvNameCaller"
         android:layout_width="154dp"
         android:layout_height="wrap_content"
@@ -59,7 +57,6 @@
         android:id="@+id/tvLocation"
         android:layout_width="154dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvUsername"
         android:layout_below="@id/tvNameCaller"
         android:layout_marginTop="4dp"
         android:layout_toEndOf="@id/ivAvatar"
@@ -71,7 +68,6 @@
         android:textSize="12sp" />
 
     <ImageView
-        android:id="@+id/tvAccept"
         android:id="@+id/ivAcceptCall"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -85,15 +81,12 @@
         android:src="@drawable/ic_accept"/>
 
     <ImageView
-        android:id="@+id/tvDecline"
         android:id="@+id/ivDeclineCall"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_toStartOf="@id/tvAccept"
-        android:layout_toLeftOf="@id/tvAccept"
         android:layout_toStartOf="@id/ivAcceptCall"
         android:layout_toLeftOf="@id/ivAcceptCall"
         android:background="@drawable/bg_button_decline"
