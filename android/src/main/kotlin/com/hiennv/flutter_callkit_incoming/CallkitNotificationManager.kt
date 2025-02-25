@@ -49,7 +49,8 @@ class CallkitNotificationManager(private val context: Context) {
 
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private var notificationViews: RemoteViews? = null
-    private var notificationSmallViews: RemoteViews? = null
+
+    //    private var notificationSmallViews: RemoteViews? = null
     private var notificationId: Int = 9696
     private var dataNotificationPermission: Map<String, Any> = HashMap()
 
@@ -73,8 +74,8 @@ class CallkitNotificationManager(private val context: Context) {
         override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
             notificationViews?.setImageViewBitmap(R.id.ivAvatar, bitmap)
             notificationViews?.setViewVisibility(R.id.ivAvatar, View.VISIBLE)
-            notificationSmallViews?.setImageViewBitmap(R.id.ivAvatar, bitmap)
-            notificationSmallViews?.setViewVisibility(R.id.ivAvatar, View.VISIBLE)
+//            notificationSmallViews?.setImageViewBitmap(R.id.ivAvatar, bitmap)
+//            notificationSmallViews?.setViewVisibility(R.id.ivAvatar, View.VISIBLE)
             getNotificationManager().notify(notificationId, notificationBuilder.build())
         }
 
@@ -104,7 +105,7 @@ class CallkitNotificationManager(private val context: Context) {
         )
 
         notificationBuilder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID_INCOMING)
-        notificationBuilder.setAutoCancel(false)
+        notificationBuilder.setAutoCancel(true)
         notificationBuilder.setChannelId(NOTIFICATION_CHANNEL_ID_INCOMING)
         notificationBuilder.setDefaults(NotificationCompat.DEFAULT_VIBRATE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -127,50 +128,29 @@ class CallkitNotificationManager(private val context: Context) {
         )
         notificationBuilder.setContentIntent(getActivityPendingIntent(notificationId, data))
         notificationBuilder.setDeleteIntent(getTimeOutPendingIntent(notificationId, data))
-        val typeCall = data.getInt(CallkitConstants.EXTRA_CALLKIT_TYPE, -1)
-        var smallIcon = context.applicationInfo.icon
-        if (typeCall > 0) {
-            smallIcon = R.drawable.ic_video
-        } else {
-            if (smallIcon >= 0) {
-                smallIcon = R.drawable.ic_accept
-            }
-        }
-        notificationBuilder.setSmallIcon(smallIcon)
-        val actionColor = data.getString(CallkitConstants.EXTRA_CALLKIT_ACTION_COLOR, "#4CAF50")
-        try {
-            notificationBuilder.color = Color.parseColor(actionColor)
-        } catch (_: Exception) {
-        }
+//        val typeCall = data.getInt(CallkitConstants.EXTRA_CALLKIT_TYPE, -1)
+//        if (typeCall > 0) {
+//            smallIcon = R.drawable.ic_video
+//        } else {
+//            if (smallIcon >= 0) {
+//                smallIcon = R.drawable.ic_accept
+//            }
+//        }
+//        val actionColor = data.getString(CallkitConstants.EXTRA_CALLKIT_ACTION_COLOR, "#4CAF50")
+//        try {
+//            notificationBuilder.color = Color.parseColor(actionColor)
+//        } catch (_: Exception) {
+//        }
+        notificationBuilder.setSmallIcon(context.applicationInfo.icon)
         notificationBuilder.setChannelId(NOTIFICATION_CHANNEL_ID_INCOMING)
         notificationBuilder.priority = NotificationCompat.PRIORITY_MAX
         val isCustomNotification =
             data.getBoolean(CallkitConstants.EXTRA_CALLKIT_IS_CUSTOM_NOTIFICATION, false)
-        val isCustomSmallExNotification =
-            data.getBoolean(CallkitConstants.EXTRA_CALLKIT_IS_CUSTOM_SMALL_EX_NOTIFICATION, false)
         if (isCustomNotification) {
             notificationViews =
                 RemoteViews(context.packageName, R.layout.layout_custom_notification)
             initNotificationViews(notificationViews!!, data)
-
-            if ((Build.MANUFACTURER.equals(
-                    "Samsung",
-                    ignoreCase = true
-                ) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) || isCustomSmallExNotification
-            ) {
-                notificationSmallViews =
-                    RemoteViews(context.packageName, R.layout.layout_custom_small_ex_notification)
-                initNotificationViews(notificationSmallViews!!, data)
-            } else {
-                notificationSmallViews =
-                    RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
-                initNotificationViews(notificationSmallViews!!, data)
-            }
-
-            notificationBuilder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
-            notificationBuilder.setCustomContentView(notificationSmallViews)
-            notificationBuilder.setCustomBigContentView(notificationViews)
-            notificationBuilder.setCustomHeadsUpContentView(notificationSmallViews)
+            notificationBuilder.setCustomContentView(notificationViews)
         } else {
             notificationBuilder.setContentText(
                 data.getString(
@@ -194,6 +174,7 @@ class CallkitNotificationManager(private val context: Context) {
                     )
                     .setBot(data.getBoolean(CallkitConstants.EXTRA_CALLKIT_IS_BOT, false))
                     .build()
+                val typeCall = data.getInt(CallkitConstants.EXTRA_CALLKIT_TYPE, -1)
                 notificationBuilder.setStyle(
                     NotificationCompat.CallStyle.forIncomingCall(
                         person,
@@ -222,6 +203,10 @@ class CallkitNotificationManager(private val context: Context) {
         }
         val notification = notificationBuilder.build()
         notification.flags = Notification.FLAG_INSISTENT
+        notification.flags = Notification.FLAG_NO_CLEAR
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            notification.flags = Notification.FLAG_ONGOING_EVENT
+        }
         getNotificationManager().notify(notificationId, notification)
     }
 
@@ -238,7 +223,7 @@ class CallkitNotificationManager(private val context: Context) {
             )
         }
         remoteViews.setOnClickPendingIntent(
-            R.id.llDecline,
+            R.id.ivDeclineCall,
             getDeclinePendingIntent(notificationId, data)
         )
         val textDecline = data.getString(CallkitConstants.EXTRA_CALLKIT_TEXT_DECLINE, "")
@@ -247,7 +232,7 @@ class CallkitNotificationManager(private val context: Context) {
             if (TextUtils.isEmpty(textDecline)) context.getString(R.string.text_decline) else textDecline
         )
         remoteViews.setOnClickPendingIntent(
-            R.id.llAccept,
+            R.id.ivAcceptCall,
             getAcceptPendingIntent(notificationId, data)
         )
         val textAccept = data.getString(CallkitConstants.EXTRA_CALLKIT_TEXT_ACCEPT, "")
@@ -349,7 +334,6 @@ class CallkitNotificationManager(private val context: Context) {
                 getPicassoInstance(context, headers).load(avatarUrl)
                     .transform(CircleTransform()).into(targetLoadAvatarCustomize)
             }
-            notificationBuilder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
             notificationBuilder.setCustomContentView(notificationViews)
             notificationBuilder.setCustomBigContentView(notificationViews)
         } else {
@@ -572,8 +556,8 @@ class CallkitNotificationManager(private val context: Context) {
 
     fun requestFullIntentPermission(activity: Activity?) {
         if (Build.VERSION.SDK_INT > 33) {
-           val intent = Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT).apply {
-                data =  Uri.fromParts("package", activity?.packageName, null)
+            val intent = Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT).apply {
+                data = Uri.fromParts("package", activity?.packageName, null)
             }
             activity?.startActivity(intent)
         }
@@ -665,5 +649,6 @@ class CallkitNotificationManager(private val context: Context) {
 
 
 }
+
 
 

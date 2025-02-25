@@ -1,97 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:background="@drawable/bg_notification"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_price_top"
-        android:layout_width="140dp"
-        android:layout_height="20dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/bg_price_top"
-        android:orientation="horizontal">
-        <!-- Tiêu đề "무료/분" -->
-        <TextView
-            android:id="@+id/tvPriceCall"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="무료/분"
-            android:textColor="#FFD700"
-            android:textSize="12sp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/base_margin">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_circle"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_avatar" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNameCaller"
+                android:layout_width="154dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="김유나"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="154dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="경기 성남"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivDeclineCall"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="@dimen/base_margin_x2_5"
+            android:background="@drawable/bg_button_decline"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/base_margin_half"
+            android:src="@drawable/ic_decline"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/ivAcceptCall"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_button_accept"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/base_margin_half"
+            android:src="@drawable/ic_accept"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/ivAvatar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/bg_circle"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_default_avatar" />
-
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="154dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_toEndOf="@id/ivAvatar"
-        android:layout_toRightOf="@id/ivAvatar"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="김유나"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="154dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvUsername"
-        android:layout_marginTop="4dp"
-        android:layout_toEndOf="@id/ivAvatar"
-        android:layout_toRightOf="@id/ivAvatar"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="경기 성남"
-        android:textColor="@android:color/white"
-        android:textSize="12sp" />
-
-    <ImageView
-        android:id="@+id/tvAccept"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/bg_button_accept"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="4dp"
-        android:src="@drawable/ic_accept"/>
-
-    <ImageView
-        android:id="@+id/tvDecline"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_toStartOf="@id/tvAccept"
-        android:layout_toLeftOf="@id/tvAccept"
-        android:background="@drawable/bg_button_decline"
-        android:padding="4dp"
-        android:src="@drawable/ic_decline" />
-
-</RelativeLayout>
+</LinearLayout>
