@@ -3,7 +3,9 @@ package com.hiennv.flutter_callkit_incoming
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 
 class TransparentActivity : Activity() {
 
@@ -29,17 +31,27 @@ class TransparentActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
 
-        val data = intent.getBundleExtra("data")
+            val data = intent.getBundleExtra("data")
 
-        val broadcastIntent = CallkitIncomingBroadcastReceiver.getIntent(this, intent.action!!, data)
-        broadcastIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
-        sendBroadcast(broadcastIntent)
+            val broadcastIntent =
+                CallkitIncomingBroadcastReceiver.getIntent(this, intent.action!!, data)
+            broadcastIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+            sendBroadcast(broadcastIntent)
 
-        val activityIntent = AppUtils.getAppIntent(this, intent.action, data)
-        startActivity(activityIntent)
+            val activityIntent = AppUtils.getAppIntent(this, intent.action, data)
+            startActivity(activityIntent)
 
-        finish()
-        overridePendingTransition(0, 0)
+            finish()
+            if (Build.VERSION.SDK_INT >= 34) {
+                overrideActivityTransition(android.app.Activity.OVERRIDE_TRANSITION_OPEN, 0, 0)
+            } else {
+                overridePendingTransition(0, 0)
+            }
+
+        } catch (error: Exception) {
+            Log.d("CALL_KIT_Activity", "Error : $error")
+        }
     }
 }
