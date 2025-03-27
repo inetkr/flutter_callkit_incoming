@@ -15,6 +15,7 @@ class CallKitParams {
     this.appName,
     this.avatar,
     this.handle,
+    this.age,
     this.type,
     this.normalHandle,
     this.duration,
@@ -32,6 +33,7 @@ class CallKitParams {
   final String? appName;
   final String? avatar;
   final String? handle;
+  final int? age;
   final int? type;
   final int? normalHandle;
   final int? duration;

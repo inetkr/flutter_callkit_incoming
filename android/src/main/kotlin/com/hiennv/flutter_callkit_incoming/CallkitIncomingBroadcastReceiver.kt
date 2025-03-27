@@ -206,6 +206,7 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
                 "nameCaller" to data.getString(CallkitConstants.EXTRA_CALLKIT_NAME_CALLER, ""),
                 "avatar" to data.getString(CallkitConstants.EXTRA_CALLKIT_AVATAR, ""),
                 "number" to data.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, ""),
+                "age" to data.getInt(CallkitConstants.EXTRA_CALLKIT_AGE, 20),
                 "type" to data.getInt(CallkitConstants.EXTRA_CALLKIT_TYPE, 0),
                 "duration" to data.getLong(CallkitConstants.EXTRA_CALLKIT_DURATION, 0L),
                 "textAccept" to data.getString(CallkitConstants.EXTRA_CALLKIT_TEXT_ACCEPT, ""),

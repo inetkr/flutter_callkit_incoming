@@ -21,6 +21,8 @@ data class Data(val args: Map<String, Any?>) {
     var handle: String = (args["handle"] as? String) ?: ""
     @JsonProperty("avatar")
     var avatar: String = (args["avatar"] as? String) ?: ""
+    @JsonProperty("age")
+    var age: Int = (args["age"] as? Int) ?: 20
     @JsonProperty("type")
     var type: Int = (args["type"] as? Int) ?: 0
     @JsonProperty("duration")
@@ -245,6 +247,7 @@ data class Data(val args: Map<String, Any?>) {
                 bundle.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
             data.avatar =
                 bundle.getString(CallkitConstants.EXTRA_CALLKIT_AVATAR, "")
+            data.age = bundle.getInt(CallkitConstants.EXTRA_CALLKIT_AGE, 20)
             data.type = bundle.getInt(CallkitConstants.EXTRA_CALLKIT_TYPE, 0)
             data.duration =
                 bundle.getLong(CallkitConstants.EXTRA_CALLKIT_DURATION, 30000L)
