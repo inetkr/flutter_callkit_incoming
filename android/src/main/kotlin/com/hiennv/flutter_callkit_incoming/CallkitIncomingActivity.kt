@@ -71,16 +71,12 @@ class CallkitIncomingActivity : Activity() {
 
     private lateinit var tvNameCaller: TextView
 
-    private lateinit var tvLocation: TextView
+    private lateinit var tvAge: TextView
     private lateinit var ivLogo: ImageView
     private lateinit var ivAvatar: CircleImageView
 
-    //    private lateinit var llAction: LinearLayout
     private lateinit var ivAcceptCall: ImageView
-//    private lateinit var tvAccept: TextView
-
     private lateinit var ivDeclineCall: ImageView
-//    private lateinit var tvDecline: TextView
 
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -177,7 +173,7 @@ class CallkitIncomingActivity : Activity() {
 //        val textColor = data?.getString(CallkitConstants.EXTRA_CALLKIT_TEXT_COLOR, "#ffffff")
 //        val isShowCallID = data?.getBoolean(CallkitConstants.EXTRA_CALLKIT_IS_SHOW_CALL_ID, false)
         tvNameCaller.text = data?.getString(CallkitConstants.EXTRA_CALLKIT_NAME_CALLER, "")
-        tvLocation.text = data?.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
+        tvAge.text = data?.getInt(CallkitConstants.EXTRA_CALLKIT_AGE, 20).toString()
 //        val extraValue =
 //            data?.getSerializable(CallkitConstants.EXTRA_CALLKIT_EXTRA) as HashMap<String, Any?>
 
@@ -264,7 +260,7 @@ class CallkitIncomingActivity : Activity() {
         llBackgroundAnimation.startRippleAnimation()
 
         tvNameCaller = findViewById(R.id.tvNameCaller)
-        tvLocation = findViewById(R.id.tvLocation)
+        tvAge = findViewById(R.id.tvAge)
         ivLogo = findViewById(R.id.ivLogo)
         ivAvatar = findViewById(R.id.ivAvatar)
 

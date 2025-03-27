@@ -215,13 +215,10 @@ class CallkitNotificationManager(private val context: Context) {
             R.id.tvNameCaller,
             data.getString(CallkitConstants.EXTRA_CALLKIT_NAME_CALLER, "")
         )
-        val isShowCallID = data?.getBoolean(CallkitConstants.EXTRA_CALLKIT_IS_SHOW_CALL_ID, false)
-        if (isShowCallID == true) {
-            remoteViews.setTextViewText(
-                R.id.tvNumber,
-                data.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
-            )
-        }
+        remoteViews.setTextViewText(
+            R.id.tvAge,
+            data.getInt(CallkitConstants.EXTRA_CALLKIT_AGE, 20).toString()
+        )
         remoteViews.setOnClickPendingIntent(
             R.id.ivDeclineCall,
             getDeclinePendingIntent(notificationId, data)
@@ -307,24 +304,24 @@ class CallkitNotificationManager(private val context: Context) {
                     data.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
                 )
             }
-            notificationViews?.setOnClickPendingIntent(
-                R.id.llCallback,
-                getCallbackPendingIntent(notificationId, data)
-            )
-            val isShowCallback = data.getBoolean(
-                CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_CALLBACK_SHOW,
-                true
-            )
-            notificationViews?.setViewVisibility(
-                R.id.llCallback,
-                if (isShowCallback) View.VISIBLE else View.GONE
-            )
-            val textCallback =
-                data.getString(CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_CALLBACK_TEXT, "")
-            notificationViews?.setTextViewText(
-                R.id.tvCallback,
-                if (TextUtils.isEmpty(textCallback)) context.getString(R.string.text_call_back) else textCallback
-            )
+//            notificationViews?.setOnClickPendingIntent(
+//                R.id.llCallback,
+//                getCallbackPendingIntent(notificationId, data)
+//            )
+//            val isShowCallback = data.getBoolean(
+//                CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_CALLBACK_SHOW,
+//                true
+//            )
+//            notificationViews?.setViewVisibility(
+//                R.id.llCallback,
+//                if (isShowCallback) View.VISIBLE else View.GONE
+//            )
+//            val textCallback =
+//                data.getString(CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_CALLBACK_TEXT, "")
+//            notificationViews?.setTextViewText(
+//                R.id.tvCallback,
+//                if (TextUtils.isEmpty(textCallback)) context.getString(R.string.text_call_back) else textCallback
+//            )
 
             val avatarUrl = data.getString(CallkitConstants.EXTRA_CALLKIT_AVATAR, "")
             if (avatarUrl != null && avatarUrl.isNotEmpty()) {
@@ -357,20 +354,20 @@ class CallkitNotificationManager(private val context: Context) {
                 getPicassoInstance(context, headers).load(avatarUrl)
                     .into(targetLoadAvatarDefault)
             }
-            val isShowCallback = data.getBoolean(
-                CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_CALLBACK_SHOW,
-                true
-            )
-            if (isShowCallback) {
-                val textCallback =
-                    data.getString(CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_CALLBACK_TEXT, "")
-                val callbackAction: NotificationCompat.Action = NotificationCompat.Action.Builder(
-                    R.drawable.ic_accept,
-                    if (TextUtils.isEmpty(textCallback)) context.getString(R.string.text_call_back) else textCallback,
-                    getCallbackPendingIntent(notificationId, data)
-                ).build()
-                notificationBuilder.addAction(callbackAction)
-            }
+//            val isShowCallback = data.getBoolean(
+//                CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_CALLBACK_SHOW,
+//                true
+//            )
+//            if (isShowCallback) {
+//                val textCallback =
+//                    data.getString(CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_CALLBACK_TEXT, "")
+//                val callbackAction: NotificationCompat.Action = NotificationCompat.Action.Builder(
+//                    R.drawable.ic_accept,
+//                    if (TextUtils.isEmpty(textCallback)) context.getString(R.string.text_call_back) else textCallback,
+//                    getCallbackPendingIntent(notificationId, data)
+//                ).build()
+//                notificationBuilder.addAction(callbackAction)
+//            }
         }
         notificationBuilder.priority = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             NotificationManager.IMPORTANCE_HIGH
