@@ -61,8 +61,8 @@
                 android:layout_below="@id/ivAvatar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/base_margin_x2"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvNameCaller"
@@ -83,9 +83,17 @@
                     tools:ignore="MissingPrefix"
                     tools:targetApi="o"
                     tools:text="Caller Name" />
-
             </LinearLayout>
-
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="20세"
+                android:textSize="0sp" />
         </com.hiennv.flutter_callkit_incoming.widgets.RippleRelativeLayout>
 
 

@@ -37,17 +37,25 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_age"
+                android:paddingHorizontal="@dimen/base_margin_half"
+                android:layout_weight="1"
+                android:orientation="vertical">
             <TextView
                 android:id="@+id/tvAge"
-                android:layout_width="154dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="20"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="#ffffff"
                 android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <ImageView
