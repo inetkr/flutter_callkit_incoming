@@ -142,7 +142,7 @@ data class Data(val args: Map<String, Any?>) {
     }
 
 
-    fun toBundle(): Bundle {bundle.putInt(CallkitConstants.EXTRA_CALLKIT_AGE, age)
+    fun toBundle(): Bundle {
         val bundle = Bundle()
         bundle.putString(CallkitConstants.EXTRA_CALLKIT_ID, id)
         bundle.putString(CallkitConstants.EXTRA_CALLKIT_NAME_CALLER, nameCaller)
