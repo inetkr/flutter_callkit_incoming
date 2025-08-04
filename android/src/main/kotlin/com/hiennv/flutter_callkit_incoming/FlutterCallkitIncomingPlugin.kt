@@ -275,9 +275,11 @@ class FlutterCallkitIncomingPlugin : FlutterPlugin, MethodCallHandler, ActivityA
                         }
                     }
                     callkitNotificationManager?.requestNotificationPermission(activity, map)
+                    result.success(true)
                 }
                 "requestFullIntentPermission" -> {
                     callkitNotificationManager?.requestFullIntentPermission(activity)
+                    result.success(true)
                 }
                 // EDIT - clear the incoming notification/ring (after accept/decline/timeout)
                 "hideCallkitIncoming" -> {

@@ -540,19 +540,25 @@ class CallkitNotificationManager(private val context: Context) {
 
     fun requestNotificationPermission(activity: Activity?, map: Map<String, Any>) {
         this.dataNotificationPermission = map
-        if (Build.VERSION.SDK_INT > 32) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             activity?.let {
-                ActivityCompat.requestPermissions(
-                    it,
-                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                    PERMISSION_NOTIFICATION_REQUEST_CODE
-                )
+                if (ActivityCompat.checkSelfPermission(
+                        it, Manifest.permission.POST_NOTIFICATIONS
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        it,
+                        arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                        PERMISSION_NOTIFICATION_REQUEST_CODE
+                    )
+                }
             }
         }
     }
 
     fun requestFullIntentPermission(activity: Activity?) {
-        if (Build.VERSION.SDK_INT > 33) {
+        val canUseFullScreenIntent = getNotificationManager().canUseFullScreenIntent()
+        if (!canUseFullScreenIntent && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             val intent = Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT).apply {
                 data = Uri.fromParts("package", activity?.packageName, null)
             }
