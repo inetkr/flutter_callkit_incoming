@@ -28,6 +28,7 @@ import com.squareup.picasso.OkHttp3Downloader
 import android.os.PowerManager
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 
 
 class CallkitIncomingActivity : Activity() {
@@ -94,6 +95,7 @@ class CallkitIncomingActivity : Activity() {
             window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
             window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
         }
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_callkit_incoming)
         initView()
         incomingData(intent, applicationContext)

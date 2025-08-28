@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 
 class TransparentActivity : Activity() {
@@ -43,7 +45,9 @@ class TransparentActivity : Activity() {
             val activityIntent = AppUtils.getAppIntent(this, intent.action, data)
             startActivity(activityIntent)
 
-            finish()
+            Handler(Looper.getMainLooper()).post {
+                finish()
+            }
             if (Build.VERSION.SDK_INT >= 34) {
                 overrideActivityTransition(android.app.Activity.OVERRIDE_TRANSITION_OPEN, 0, 0)
             } else {
